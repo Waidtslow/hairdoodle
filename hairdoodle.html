@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HairDoodle | Bespoke Grooming</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-bright": "#f8f9f9",
+          "surface-container-highest": "#e1e3e3",
+          "on-error": "#ffffff",
+          "surface-variant": "#e1e3e3",
+          "background": "#f8f9f9",
+          "tertiary-fixed-dim": "#b0c6f9",
+          "secondary-fixed-dim": "#c1c8cb",
+          "outline": "#7f7667",
+          "on-secondary-container": "#5d6467",
+          "on-surface-variant": "#4e4639",
+          "surface-container-high": "#e7e8e8",
+          "on-background": "#191c1c",
+          "surface-container-low": "#f3f4f4",
+          "on-primary-fixed": "#261900",
+          "error": "#ba1a1a",
+          "primary-container": "#c5a059",
+          "on-secondary": "#ffffff",
+          "tertiary-container": "#8fa5d6",
+          "on-primary-container": "#4e3700",
+          "on-error-container": "#93000a",
+          "outline-variant": "#d1c5b4",
+          "primary-fixed": "#ffdea5",
+          "tertiary": "#485e8b",
+          "on-tertiary-fixed": "#001a41",
+          "on-tertiary": "#ffffff",
+          "on-primary-fixed-variant": "#5d4201",
+          "inverse-primary": "#e9c176",
+          "on-secondary-fixed-variant": "#41484b",
+          "surface-container-lowest": "#ffffff",
+          "secondary-fixed": "#dde3e7",
+          "error-container": "#ffdad6",
+          "surface-tint": "#775a19",
+          "surface": "#f8f9f9",
+          "on-secondary-fixed": "#161d1f",
+          "surface-container": "#edeeee",
+          "primary-fixed-dim": "#e9c176",
+          "tertiary-fixed": "#d8e2ff",
+          "surface-dim": "#d9dada",
+          "inverse-surface": "#2e3131",
+          "secondary": "#585f62",
+          "on-surface": "#191c1c",
+          "inverse-on-surface": "#f0f1f1",
+          "on-primary": "#ffffff",
+          "on-tertiary-container": "#233a65",
+          "secondary-container": "#dae1e4",
+          "on-tertiary-fixed-variant": "#304671",
+          "primary": "#775a19"
+        },
+        fontFamily: {
+          "headline": ["Noto Serif"],
+          "body": ["Manrope"],
+          "label": ["Manrope"]
+        },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .gold-gradient { background: linear-gradient(135deg, #775a19 0%, #c5a059 100%); }
+  .editorial-gradient { background: linear-gradient(135deg, #775a19 0%, #c5a059 100%); }
+  .glass-panel { background: rgba(255,255,255,0.7); backdrop-filter: blur(20px); }
+  .soft-glow { box-shadow: 0 48px 100px 0 rgba(25,28,28,0.06); }
+  .page { display: none; }
+  .page.active { display: block; }
+  #page-login { display: none; }
+  #page-login.active { display: flex; }
+  #page-confirmation.active { display: flex; }
+</style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+
+<!-- ===================== TOP NAV ===================== -->
+<nav id="main-nav" class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md shadow-sm">
+  <div class="flex justify-between items-center max-w-7xl mx-auto px-6 py-4 w-full">
+    <div onclick="showPage('home')" class="text-2xl font-serif italic text-stone-900 cursor-pointer">HairDoodle</div>
+    <div class="hidden md:flex items-center gap-8">
+      <a onclick="showPage('home')" id="nav-home" class="text-amber-700 font-bold border-b-2 border-amber-600/30 pb-1 font-body tracking-[0.05em] uppercase text-xs cursor-pointer">Home</a>
+      <a onclick="showPage('booking')" id="nav-services" class="text-stone-600 font-medium font-body tracking-[0.05em] uppercase text-xs hover:text-amber-600 transition-colors duration-300 cursor-pointer">Services</a>
+      <a onclick="showPage('home')" id="nav-gallery" class="text-stone-600 font-medium font-body tracking-[0.05em] uppercase text-xs hover:text-amber-600 transition-colors duration-300 cursor-pointer">Gallery</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <button onclick="showPage('login')" class="hidden md:block text-stone-600 font-medium hover:text-amber-600 transition-colors duration-300 text-sm">Login</button>
+      <button onclick="showPage('booking')" class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-6 py-2 rounded-full font-semibold text-sm hover:opacity-90 active:scale-95 transition-all duration-200">Book Now</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HOME PAGE ===================== -->
+<div id="page-home" class="page active">
+  <main class="pt-20">
+    <!-- Hero -->
+    <section class="relative min-h-[870px] flex items-center px-6 lg:px-24 overflow-hidden bg-surface-container-lowest">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+        <div class="z-10 order-2 lg:order-1">
+          <span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold tracking-widest uppercase mb-6">Bespoke Atelier</span>
+          <h1 class="font-headline text-5xl lg:text-7xl text-on-surface leading-tight mb-6">Elevated Care for Your <span class="italic text-primary">Doodle</span></h1>
+          <p class="text-secondary text-lg lg:text-xl max-w-lg mb-10 leading-relaxed">Precision grooming tailored to the unique texture and personality of every coat. Where craftsmanship meets canine comfort.</p>
+          <div class="flex flex-wrap gap-4">
+            <button onclick="showPage('booking')" class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-10 py-4 rounded-full font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform">Book Consultation</button>
+            <button class="flex items-center gap-2 px-8 py-4 text-on-surface font-semibold hover:text-primary transition-colors">
+              Explore Styles <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+        <div class="relative order-1 lg:order-2">
+          <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl relative z-10 transform lg:rotate-2">
+            <img alt="Well-groomed goldendoodle sitting proudly" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWWa7pvhyZ4suRUd1Ci3iyC5hVAF09nWQBWTTV4mHnwdoQTbQBKOrOMw1Lhr0-k2s_AMLjG5N9OWkndmE_tpTBqImsA4izhmWme1ronOoeXBvL2SeUF8bH2G6v_nO4a9JUDc5YB-hqgZymdNNdk9LczyBegkcv0EkSKPCSUCxGHjeG5zLLQkIzjI9iO7KPuTHYc3c_3Rt0-1KFd8Jw1YhAELvhnKBvY4t3qx0IYUtgIlc7p52q48tJZTwBeP7fajkzwseHppqWkII"/>
+          </div>
+          <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-primary-fixed-dim/30 rounded-full blur-3xl -z-0"></div>
+          <div class="absolute top-10 right-10 w-48 h-48 bg-secondary-container rounded-full blur-2xl -z-0 opacity-50"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Instagram Carousel -->
+    <section class="py-12 bg-surface-container-low overflow-hidden">
+      <div class="px-6 lg:px-24 mb-6 flex justify-between items-end">
+        <div>
+          <h2 class="font-headline text-2xl text-on-surface">Our Recent Grooms</h2>
+          <p class="text-secondary text-sm">Follow @HairDoodle for daily transformations</p>
+        </div>
+      </div>
+      <div class="flex gap-4 overflow-x-auto hide-scrollbar px-6 lg:px-24 snap-x">
+        <div class="flex-none w-64 aspect-square rounded-xl overflow-hidden snap-center"><img alt="Doodle grooming result" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPjnPN_7GMjCdH1QQnNcdtB9snd0FECJUCdBJ9qUMjoMzaR0ZwUPtLLXj7M0dhaVwq2it6xzM2IPwEfQTBeHSRBuCxE9RxTFFZ6qdH83QaYL8TjjzsVglTi5O38EtDA-rNnCnQhemYdJ7sykAWqsHdDROZbd8Yx7nqqyPMESRJYrdc2cM6Dl0NyzuqEFtqE-7EEKyiB6N7YB_rmMwfTeRl1OU28WlZgtv8WSIGibx23OMKPG47ikHRdYUTU5_h0eX974Y9zh1f0Js"/></div>
+        <div class="flex-none w-64 aspect-square rounded-xl overflow-hidden snap-center"><img alt="Doodle grooming result" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAesOjec83ricAj21FmTG-H-YbGE9xz40LYOtNYi6XuN4k3_xn66GwtGNqPCPIwJV7l9OyqA5IdtX4cAOduiDG4ATFIyGfKhTt31ZXzOITWDeGdKXaabzWRCXZTmUHVy2MFcgQSn5aMYtk5mxR5mNDhnfFaG7e2MDVDiuq-pboVVoT2PsQfQVmqRE-j16kx6vQLVYuTEgfCoBzu5kRkAnuCiI9VkrCh5DipJ-Qlm0CoISOJupk9e1o0gYb58bvKsS4zN3wlQRsR0XI"/></div>
+        <div class="flex-none w-64 aspect-square rounded-xl overflow-hidden snap-center"><img alt="Doodle grooming result" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7GsS4PIHukL8JTgfmKvTs9Npzq-uTLKR2EXxo9ppfvZ5T1RC20_Fa4UkIsNTii9vJRKJ10j27ahpSFkTFiHHYhQJx-1q2Q1Zi5S7IjyNDOVAYvVwpDn0reug_RLUZHSOdssh78EIczIEABEzxu_Mf009VZI4bGG-uE4xiyfSUssqlLDTjOdCR5VGo4SVYbXkot3Pt1cY7ybuaU6uEfL3tWdUJ9gAl9P6eHZg-GXN93UsbwdHG8QGnp5PY7aLHjPPh5nOXLeh0F6Y"/></div>
+        <div class="flex-none w-64 aspect-square rounded-xl overflow-hidden snap-center"><img alt="Doodle grooming result" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1F8EGjmZ5RAw55ApPT8z0lR1MPMRs7hAJtO0f4QwRHWqzaL6Rhi6fyYznMAM-ZfG17OI5rxVdyAZKWk5F3vUAdmk3OmjZpC9eLzi1ZaSjW2P3eJQ4KKGwUsrtiqn4dS-7oLTjL5Kxwd2RB9Rx4zqX6MwksInuKpysv405PDHq5CXuCpycJR-_sgQIoxwemixv_p1IC5BlY-ldG7fSLlahZt-yD1bHSGyfHtIFBz6ci50cDX0wKS9pMUWKWtEN2kwtSHZ2neAWtMM"/></div>
+        <div class="flex-none w-64 aspect-square rounded-xl overflow-hidden snap-center"><img alt="Doodle grooming result" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_iSqFr39oQHo-zlV-VHOieKLtoGLzmovnuu2qTgkcEiKxFp7ZDK5xJ0nXiQ0ZKvBAp-FpV3K25uzbv3Zt7ejrAnoV-BgcPtvBS1HD50RlDtjGm9nTVnqVYrWnUUm0xrig-OGDXRQVX2KlFkN3JCIzWrDMUA9usq9ilUCPxQvlIo0mKKJsLVUDCQiEJcvTTqLpeW88BcV_ouKbxAOxFODknKEFNoz9lu1vSuuZKoCzK2uJ5CUFdizAEYDc6vF_Bi77zX2kNSQvrkg"/></div>
+        <div class="flex-none w-64 aspect-square rounded-xl overflow-hidden snap-center"><img alt="Doodle grooming result" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpKHZfMBQS96xyS6-q7em2dSY0NPUt3OPqUvF8RsOByYcJ1SScvlfolOrENGa012KS5pfyGOOiv4Mg1Bc0ZOjpVwE5sMwOnvdQn5K6OmQPuGttW_gBeKqe-r3cgjlFVo-lww5LpQUyrx0qyBk9EniENrmnbMKUtLPJP6aOLlRiPOfDe_K-s8S1er_dt4d4bHEdzwJtA_h9EBQBcnjS3jhFcYPIGa4HVjv141LG_U7Xc-skXNfXznh3E7Z40GnD5L0SrWJpPFuwXHE"/></div>
+      </div>
+    </section>
+
+    <!-- Our Specialty -->
+    <section class="py-24 px-6 lg:px-24 bg-surface">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-16">
+          <label class="font-label uppercase tracking-[0.2em] text-xs text-primary font-bold mb-4 block">Our Specialty</label>
+          <h2 class="font-headline text-4xl lg:text-5xl text-on-surface">The Signature <span class="italic">Doodle</span> Cut</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
+          <div class="md:col-span-7 bg-surface-container-low rounded-3xl overflow-hidden relative group">
+            <img alt="Artistic groom" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYKTb6aJCY-2QDQiirtH7O6M8Mzqra2NWeyOczvSSh_BRBpTnANrtGfPtv4yGGAXaZPoXfnS4ty6sI4iz7g2VHPAW-uV8dn2rH3EK6EbE85_WVDv0Q_Ms_24UBZuOBd7PnAe-FFT5ymCQDNGHulBGHZK2ztFANcR_cu0z2yb8KTySU3YhjnikiBDStflFJC-2dd9zn2HSrh-S_ItEslQxgXhr3G4tKGy9jyypAN2-UT5uTZP4MD5EKWMinpUfJGXh1lmqO-4uiMn0"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 via-transparent to-transparent flex flex-col justify-end p-8">
+              <h3 class="text-surface-bright font-headline text-3xl mb-2">The Teddy Bear Sculpt</h3>
+              <p class="text-surface-bright/80 max-w-sm">Our most requested style. We hand-scissor to maintain the iconic 'fluff' while ensuring visibility and hygiene.</p>
+            </div>
+          </div>
+          <div class="md:col-span-5 grid grid-rows-2 gap-6">
+            <div class="bg-primary-container/20 rounded-3xl p-8 flex flex-col justify-center">
+              <span class="material-symbols-outlined text-4xl text-primary mb-4">content_cut</span>
+              <h3 class="font-headline text-2xl text-on-surface mb-2">Coat-Specific Blades</h3>
+              <p class="text-secondary text-sm">We use specialized cooling blades that protect sensitive doodle skin from irritation and heat.</p>
+            </div>
+            <div class="bg-surface-container-lowest rounded-3xl p-8 flex flex-col justify-center shadow-sm">
+              <span class="material-symbols-outlined text-4xl text-primary mb-4" style="font-variation-settings:'FILL' 1;">spa</span>
+              <h3 class="font-headline text-2xl text-on-surface mb-2">Stress-Free Grooming</h3>
+              <p class="text-secondary text-sm">A sensory-aware environment with pheromone diffusers and one-on-one attention for every guest.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-24 bg-surface-container-low">
+      <div class="max-w-7xl mx-auto px-6 lg:px-24">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div class="max-w-xl">
+            <h2 class="font-headline text-4xl text-on-surface mb-4">Curated Grooming Menus</h2>
+            <p class="text-secondary">From maintenance to total transformations, select the care level your companion needs.</p>
+          </div>
+          <a class="text-primary font-bold underline underline-offset-8 decoration-2 hover:opacity-70 transition-opacity cursor-pointer">View Full Pricing</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-surface-container-lowest p-8 rounded-3xl transition-all duration-300 hover:-translate-y-2">
+            <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-8"><span class="material-symbols-outlined text-primary text-3xl">soap</span></div>
+            <h3 class="font-headline text-2xl mb-4">The Refresh Bath</h3>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-start gap-3 text-secondary text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span>Double deep-cleansing shampoo</li>
+              <li class="flex items-start gap-3 text-secondary text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span>Blow-out &amp; hand brushing</li>
+              <li class="flex items-start gap-3 text-secondary text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span>Nail filing &amp; ear cleansing</li>
+            </ul>
+            <div class="pt-6 border-t border-outline-variant/10"><p class="text-xs uppercase font-bold text-outline tracking-wider">Starts at $65</p></div>
+          </div>
+          <div class="bg-surface-container-lowest p-8 rounded-3xl transition-all duration-300 hover:-translate-y-2 border-2 border-primary/20 relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-primary px-4 py-1 text-[10px] uppercase font-bold text-on-primary tracking-widest rounded-bl-xl">Popular</div>
+            <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-8"><span class="material-symbols-outlined text-primary text-3xl">styler</span></div>
+            <h3 class="font-headline text-2xl mb-4">The Atelier Groom</h3>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-start gap-3 text-secondary text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span>Full Refresh Bath package</li>
+              <li class="flex items-start gap-3 text-secondary text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span>Signature Breed-Specific Cut</li>
+              <li class="flex items-start gap-3 text-secondary text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span>Sanitary trim &amp; paw pads</li>
+            </ul>
+            <div class="pt-6 border-t border-outline-variant/10"><p class="text-xs uppercase font-bold text-outline tracking-wider">Starts at $110</p></div>
+          </div>
+          <div class="bg-surface-container-lowest p-8 rounded-3xl transition-all duration-300 hover:-translate-y-2">
+            <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-8"><span class="material-symbols-outlined text-primary text-3xl">brush</span></div>
+            <h3 class="font-headline text-2xl mb-4">De-Matting Therapy</h3>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-start gap-3 text-secondary text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span>Pain-free knot extraction</li>
+              <li class="flex items-start gap-3 text-secondary text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span>Hydrating coat mask</li>
+              <li class="flex items-start gap-3 text-secondary text-sm"><span class="material-symbols-outlined text-primary text-lg">check_circle</span>Coat maintenance consultation</li>
+            </ul>
+            <div class="pt-6 border-t border-outline-variant/10"><p class="text-xs uppercase font-bold text-outline tracking-wider">Add-on from $30</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 px-6">
+      <div class="max-w-5xl mx-auto rounded-[3rem] overflow-hidden relative">
+        <div class="bg-on-surface p-12 lg:p-20 text-center relative z-10">
+          <h2 class="font-headline text-4xl lg:text-6xl text-surface-bright mb-8 leading-tight">Ready for a <span class="italic text-primary-fixed-dim">Pawsome</span> New Look?</h2>
+          <p class="text-surface-container-highest/70 text-lg mb-12 max-w-2xl mx-auto">Limited slots available for the upcoming week. Secure your appointment at our bespoke studio today.</p>
+          <div class="flex flex-col sm:flex-row justify-center gap-6">
+            <button onclick="showPage('booking')" class="bg-primary text-on-primary px-12 py-5 rounded-full font-bold text-lg hover:bg-primary-container transition-colors shadow-xl shadow-primary/10">Book My Appointment</button>
+            <button class="bg-transparent border border-surface-container-highest/20 text-surface-bright px-12 py-5 rounded-full font-bold text-lg hover:bg-surface-bright/5 transition-colors">Contact Studio</button>
+          </div>
+        </div>
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+          <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/30 via-transparent to-transparent"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="w-full rounded-t-3xl mt-20 bg-stone-100">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 py-12 max-w-7xl mx-auto w-full">
+      <div>
+        <div class="text-xl font-serif text-stone-800 mb-6">HairDoodle</div>
+        <p class="text-stone-500 text-sm leading-relaxed mb-6">Redefining canine grooming through editorial precision and artistic care.</p>
+      </div>
+      <div>
+        <h4 class="uppercase font-semibold text-xs tracking-widest text-amber-700 mb-6">Services</h4>
+        <ul class="space-y-3">
+          <li><a class="text-stone-500 hover:text-stone-800 text-sm transition-all duration-200 cursor-pointer">The Signature Cut</a></li>
+          <li><a class="text-stone-500 hover:text-stone-800 text-sm transition-all duration-200 cursor-pointer">De-matting Therapy</a></li>
+          <li><a class="text-stone-500 hover:text-stone-800 text-sm transition-all duration-200 cursor-pointer">Puppy First Groom</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="uppercase font-semibold text-xs tracking-widest text-amber-700 mb-6">Explore</h4>
+        <ul class="space-y-3">
+          <li><a class="text-stone-500 hover:text-stone-800 text-sm transition-all duration-200 cursor-pointer">Gallery</a></li>
+          <li><a class="text-stone-500 hover:text-stone-800 text-sm transition-all duration-200 cursor-pointer">Contact Us</a></li>
+          <li><a class="text-stone-500 hover:text-stone-800 text-sm transition-all duration-200 cursor-pointer">Instagram</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="uppercase font-semibold text-xs tracking-widest text-amber-700 mb-6">Contact</h4>
+        <p class="text-stone-500 text-sm mb-2">studio@hairdoodle.com</p>
+        <p class="text-stone-500 text-sm">123 Grooming Ln, Beverly Hills, CA</p>
+      </div>
+    </div>
+    <div class="px-8 py-6 border-t border-stone-200/50 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-4">
+      <span class="text-stone-500 text-xs">© 2023 HairDoodle Bespoke Grooming. All rights reserved.</span>
+      <div class="flex gap-6">
+        <a class="text-stone-500 hover:text-stone-800 text-xs cursor-pointer">Privacy Policy</a>
+        <a class="text-stone-500 hover:text-stone-800 text-xs cursor-pointer">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== LOGIN PAGE ===================== -->
+<div id="page-login" class="page min-h-screen items-center justify-center relative overflow-hidden bg-surface pt-20">
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-secondary-container/30 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 -right-48 w-[600px] h-[600px] bg-primary-fixed/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-10 left-10 opacity-10"><span class="material-symbols-outlined text-[300px] text-secondary">pets</span></div>
+  </div>
+  <main class="relative z-10 w-full max-w-6xl px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-0 soft-glow rounded-3xl overflow-hidden bg-surface-container-lowest my-8">
+    <div class="hidden md:block md:col-span-6 lg:col-span-7 relative bg-surface-container-low min-h-[600px]">
+      <img alt="High-end groomed doodle dog" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoDwEzOcPs2Gyq1UyjqalbkbVAFW-RXhSoBCiLtXlyoIUmji_z-VmT8hNsiJ4MFjhDMu0GDExpMzgbiUREul1ozF9JAwc4WBMT8DwdRILtfCQUTsh0jAGOgH0lUY_mRbxhpOGwf3z-WprsSBlBLExKVzdlDqylhlZ1U7qg9_mqaEaoOEWsVkMCYd_WJkTKKwWdzZdW5u8mh8K019nk3_VhTzsV9ezJpXhkodNY1ZBfdSSjsFgkRER4nl3v2OCS_y7qx5z_krcVtEU"/>
+      <div class="absolute inset-0 bg-stone-900/10 mix-blend-multiply"></div>
+      <div class="absolute bottom-12 left-12 right-12">
+        <h1 class="font-headline text-4xl lg:text-5xl text-white font-bold tracking-tight italic">HairDoodle</h1>
+        <p class="text-white/80 mt-4 max-w-sm font-body text-lg leading-relaxed">Elevating the art of grooming for the modern, discerning pet owner.</p>
+      </div>
+    </div>
+    <div class="md:col-span-6 lg:col-span-5 flex flex-col justify-center p-8 lg:p-16 bg-surface-container-lowest">
+      <div class="mb-12">
+        <div class="md:hidden mb-8"><span class="font-headline text-2xl italic font-bold text-primary">HairDoodle</span></div>
+        <h2 class="font-headline text-3xl text-on-surface font-bold mb-2">Welcome Back</h2>
+        <p class="text-secondary font-body">Please enter your details to access your atelier account.</p>
+      </div>
+      <form class="space-y-6" onsubmit="return false;">
+        <div>
+          <label class="block text-xs font-label uppercase tracking-[0.05em] text-outline mb-2">Email Address</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><span class="material-symbols-outlined text-outline text-xl">mail</span></div>
+            <input class="w-full pl-11 pr-4 py-4 bg-surface-container-low border-0 outline outline-2 outline-outline-variant/20 rounded-xl focus:ring-0 focus:outline-primary/40 transition-all font-body text-on-surface placeholder:text-outline-variant/60" placeholder="alex@example.com" type="email"/>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <label class="text-xs font-label uppercase tracking-[0.05em] text-outline">Password</label>
+            <a class="text-xs font-label uppercase tracking-[0.05em] text-primary hover:text-primary-container transition-colors cursor-pointer">Forgot Password?</a>
+          </div>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><span class="material-symbols-outlined text-outline text-xl">lock</span></div>
+            <input class="w-full pl-11 pr-12 py-4 bg-surface-container-low border-0 outline outline-2 outline-outline-variant/20 rounded-xl focus:ring-0 focus:outline-primary/40 transition-all font-body text-on-surface placeholder:text-outline-variant/60" placeholder="••••••••" type="password"/>
+            <button class="absolute inset-y-0 right-0 pr-4 flex items-center text-outline-variant hover:text-outline transition-colors" type="button"><span class="material-symbols-outlined">visibility</span></button>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <input class="w-5 h-5 rounded border-outline-variant/40 text-primary focus:ring-primary/20 bg-surface-container-low" id="remember" type="checkbox"/>
+          <label class="ml-3 text-sm text-secondary" for="remember">Remember for 30 days</label>
+        </div>
+        <button onclick="showPage('home')" class="w-full gold-gradient text-on-primary font-body font-semibold py-4 rounded-full shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group" type="button">
+          Sign In <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </button>
+      </form>
+      <div class="mt-10">
+        <div class="relative flex items-center py-4">
+          <div class="flex-grow border-t border-outline-variant/20"></div>
+          <span class="flex-shrink mx-4 text-xs font-label uppercase tracking-widest text-outline-variant">Or continue with</span>
+          <div class="flex-grow border-t border-outline-variant/20"></div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mt-6">
+          <button class="flex items-center justify-center px-4 py-3 bg-surface-container-lowest outline outline-2 outline-outline-variant/20 rounded-xl hover:bg-surface-container-low transition-colors text-sm font-medium text-on-surface">
+            <img alt="Google logo" class="w-5 h-5 mr-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF140KmHm2iVSYEn-pXpiu5cMT6wW0V405m-1-8YpHDeQL_sOR-rj3TonYdefpJnxIMjy_hS1wJEdgTIqrQXBp1bzkiSQLtlH7NQ_wh3yaX0GuuVvkwhD-J7a0BvlN_iVSimLqxdinO59Kk9XTa0gNtGwFqQ4vuRr_m-cKt8D1CeZUahGmOswLYCpKELq8MbtxiHWFHzHp8Pe7vC-JN12YeBPB5qTcma1jgrRgOpJq3klbiKVgyHq4wuG29mxzSPgwtyiV9y7u0SE"/> Google
+          </button>
+          <button class="flex items-center justify-center px-4 py-3 bg-surface-container-lowest outline outline-2 outline-outline-variant/20 rounded-xl hover:bg-surface-container-low transition-colors text-sm font-medium text-on-surface">
+            <img alt="Apple logo" class="w-5 h-5 mr-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkH9_QIjZw_789gpSE2Vj-f3KRUuf8G8oL3qRf21ihONW-upWK3DEoCQ9DxgD_ZQ3G7PbqbneyCJs1hM7fySR_DZK_r6pu7R3qZCIBSEzicj9egYt90bdCRrV5DZB1_w0w3talvczznn8iiXgLjcAzRgBWKcqDU2sa7aYaFXdBA2vLs_vNMckZKKvEuz3CUYTfOgTPlHP0ZrXgpRuYFpw6qNPm6Jx04lD_bQ7ubnG_Fdpn1qg6zFnkIN3bdzu-5eE03QAAjGc4o-s"/> Apple
+          </button>
+        </div>
+        <p class="text-center mt-10 text-sm text-secondary">Don't have an account? <a class="text-primary font-bold hover:underline underline-offset-4 ml-1 cursor-pointer">Create Account</a></p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ===================== BOOKING PAGE ===================== -->
+<div id="page-booking" class="page">
+  <main class="pt-28 pb-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <header class="mb-12 text-center">
+        <h1 class="font-serif text-4xl text-on-surface mb-2">Book an Appointment</h1>
+        <p class="text-secondary font-body">Tailored grooming for your beloved doodle</p>
+        <div class="flex justify-between items-center mt-10 max-w-lg mx-auto relative">
+          <div class="absolute top-1/2 left-0 w-full h-px bg-surface-container-highest -z-10"></div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center text-white ring-8 ring-surface shadow-sm"><span class="material-symbols-outlined text-lg">cut</span></div>
+            <span class="text-[10px] font-label font-bold tracking-[0.05em] uppercase text-primary">Service</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-outline ring-8 ring-surface"><span class="material-symbols-outlined text-lg">calendar_today</span></div>
+            <span class="text-[10px] font-label font-semibold tracking-[0.05em] uppercase text-outline">Date</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-outline ring-8 ring-surface"><span class="material-symbols-outlined text-lg">pets</span></div>
+            <span class="text-[10px] font-label font-semibold tracking-[0.05em] uppercase text-outline">Details</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-outline ring-8 ring-surface"><span class="material-symbols-outlined text-lg">check_circle</span></div>
+            <span class="text-[10px] font-label font-semibold tracking-[0.05em] uppercase text-outline">Confirm</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface-container-lowest rounded-xl p-6 flex flex-col gap-4 group cursor-pointer hover:shadow-xl transition-all duration-500 border-b-4 border-transparent hover:border-primary">
+          <div class="w-full aspect-square bg-surface-container-low rounded-lg overflow-hidden relative">
+            <img alt="Full Grooming" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzTrrSUJ2WH_7rBFQoTuOxoSp2S_ibd2UsPXNUcMtltM4_TOV90gIMuZPv7fwvthH-ngN6WB7I3tsMwoQ1NttgXhcvXgf4WELX-1jXmr7WvDRXt-yt_VMlTD7eyhlNPDg9i7ZyM3nXoZ_ua-FPLQdJQjl02sVox4ld2izcp6RsvS5Yn0mii2WSy_XUx2nWTlYpdXK62xgYrd4dN3YnasiT-ELggWrdz0a251wsSpxp35Yl53qraS_WFh0bmhAKkJZkrSXo5Rr_pwA"/>
+            <div class="absolute top-3 right-3 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary tracking-widest uppercase">90-120 min</div>
+          </div>
+          <div>
+            <h3 class="font-serif text-xl text-on-surface">Full Groom</h3>
+            <p class="text-sm text-secondary mt-1 leading-relaxed">Full body haircut, bath, blow dry, nail trimming, and ear cleaning.</p>
+          </div>
+          <div class="mt-auto flex justify-between items-center">
+            <span class="font-serif text-lg font-bold text-primary">$95+</span>
+            <div class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors"><span class="material-symbols-outlined text-sm group-hover:text-white">arrow_forward</span></div>
+          </div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-6 flex flex-col gap-4 group cursor-pointer ring-2 ring-primary shadow-xl border-b-4 border-primary">
+          <div class="w-full aspect-square bg-surface-container-low rounded-lg overflow-hidden relative">
+            <img alt="Mini Grooming" class="w-full h-full object-cover transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-WGpd3YDRUxXyBFm4YFN8icxmPREwMAGw3oUDyi5v24yPO-EtqElKbHVkHo8c51C7a0vZyX_Q6sYL4Qbu39re9qW0pWpqC8NJD0Szdeh6L5ZyeCDuUxZClCM6ACMYWDuF9ul7PFQrU93nwN7VYnNqiv6mS4Gjbu-Y9KswcQERyBilSCOAoJU3al4Qy6nBwRYGIBj-J4NjyY7BgdWI98JOOmysr6J-FMKz3fKs4QrH60RrSwYM-T8RjCSml0IP7V48hQCM8mblgo0"/>
+            <div class="absolute top-3 right-3 bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase">60-90 min</div>
+          </div>
+          <div>
+            <h3 class="font-serif text-xl text-on-surface">Mini Groom</h3>
+            <p class="text-sm text-secondary mt-1 leading-relaxed">Face, feet, and fanny trim plus bath, dry, and nail care.</p>
+          </div>
+          <div class="mt-auto flex justify-between items-center">
+            <span class="font-serif text-lg font-bold text-primary">$65+</span>
+            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-sm text-white">check</span></div>
+          </div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-6 flex flex-col gap-4 group cursor-pointer hover:shadow-xl transition-all duration-500 border-b-4 border-transparent hover:border-primary">
+          <div class="w-full aspect-square bg-surface-container-low rounded-lg overflow-hidden relative">
+            <img alt="Bath and Brush" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA65L9nr0G6bjQGixQK_NszQLpgvJo8EB1jCrpAy58HxYFqE-bCF_jU21ZMUWF7sWe7vlYvLOZRWAuXJ4IER2CXAOdtOmQdlVKn-E-Pv_2W-zHQvbxeqHLNU89SjBXDgTAmd5Wa0b3U0egQpfHdKGvUw9tMrlDlllOA-zbw9tMw4wdBfeTKk_Ju3vwDoIGprAIv0GCLA9KeoKLkkOVVtIElo6yFttmIyRCY"/>
+            <div class="absolute top-3 right-3 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary tracking-widest uppercase">45-60 min</div>
+          </div>
+          <div>
+            <h3 class="font-serif text-xl text-on-surface">Bath &amp; Brush</h3>
+            <p class="text-sm text-secondary mt-1 leading-relaxed">Luxury wash with premium shampoo, blow dry, and thorough brushing.</p>
+          </div>
+          <div class="mt-auto flex justify-between items-center">
+            <span class="font-serif text-lg font-bold text-primary">$45+</span>
+            <div class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors"><span class="material-symbols-outlined text-sm group-hover:text-white">arrow_forward</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="mt-16 flex justify-between items-center bg-surface-container-low p-6 rounded-2xl">
+        <div class="flex items-center gap-4">
+          <div class="bg-surface-container-lowest p-3 rounded-lg flex items-center gap-3">
+            <div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-primary">content_cut</span></div>
+            <div>
+              <p class="text-[10px] uppercase font-bold text-outline tracking-wider">Selected Service</p>
+              <p class="text-on-surface font-semibold">Mini Groom</p>
+            </div>
+          </div>
+        </div>
+        <button onclick="showPage('checkout')" class="px-10 py-4 rounded-full gold-gradient text-white font-bold tracking-wide shadow-lg hover:shadow-primary/20 transition-all active:scale-95 flex items-center gap-2">
+          Continue to Schedule <span class="material-symbols-outlined text-sm">chevron_right</span>
+        </button>
+      </div>
+
+      <!-- Calendar -->
+      <div class="mt-24 bg-surface-container-low rounded-3xl overflow-hidden shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="p-10 bg-surface-container-lowest">
+            <div class="flex justify-between items-center mb-8">
+              <h4 class="font-serif text-2xl">Select Date</h4>
+              <div class="flex gap-2">
+                <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low text-outline"><span class="material-symbols-outlined">chevron_left</span></button>
+                <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low text-outline"><span class="material-symbols-outlined">chevron_right</span></button>
+              </div>
+            </div>
+            <div class="grid grid-cols-7 gap-y-4 text-center">
+              <div class="text-[10px] font-bold uppercase text-outline">Mo</div><div class="text-[10px] font-bold uppercase text-outline">Tu</div><div class="text-[10px] font-bold uppercase text-outline">We</div><div class="text-[10px] font-bold uppercase text-outline">Th</div><div class="text-[10px] font-bold uppercase text-outline">Fr</div><div class="text-[10px] font-bold uppercase text-outline">Sa</div><div class="text-[10px] font-bold uppercase text-outline">Su</div>
+              <div class="p-2 text-surface-container-highest">28</div><div class="p-2 text-surface-container-highest">29</div><div class="p-2 text-surface-container-highest">30</div>
+              <div class="p-2 font-medium">1</div><div class="p-2 font-medium">2</div><div class="p-2 font-medium">3</div><div class="p-2 font-medium">4</div>
+              <div class="p-2 font-medium">5</div><div class="p-2 font-medium">6</div><div class="p-2 font-medium">7</div><div class="p-2 font-medium">8</div><div class="p-2 font-medium">9</div><div class="p-2 font-medium">10</div><div class="p-2 font-medium">11</div>
+              <div class="p-2 font-medium bg-primary text-white rounded-full shadow-lg shadow-primary/30">12</div><div class="p-2 font-medium">13</div><div class="p-2 font-medium">14</div><div class="p-2 font-medium">15</div><div class="p-2 font-medium">16</div><div class="p-2 font-medium">17</div><div class="p-2 font-medium">18</div>
+            </div>
+          </div>
+          <div class="p-10 flex flex-col gap-6">
+            <h4 class="font-serif text-2xl">Available Slots</h4>
+            <div class="grid grid-cols-2 gap-3">
+              <button class="py-3 px-4 rounded-xl border border-outline-variant text-sm font-semibold hover:border-primary transition-colors">09:00 AM</button>
+              <button class="py-3 px-4 rounded-xl border border-outline-variant text-sm font-semibold hover:border-primary transition-colors">10:30 AM</button>
+              <button class="py-3 px-4 rounded-xl bg-primary/10 border-2 border-primary text-primary text-sm font-bold flex items-center justify-center gap-2">01:00 PM <span class="material-symbols-outlined text-[16px]">check</span></button>
+              <button class="py-3 px-4 rounded-xl border border-outline-variant text-sm font-semibold hover:border-primary transition-colors">02:30 PM</button>
+              <button class="py-3 px-4 rounded-xl border border-outline-variant text-sm font-semibold hover:border-primary transition-colors">04:00 PM</button>
+              <button class="py-3 px-4 rounded-xl border border-outline-variant text-sm font-semibold hover:border-primary transition-colors">05:30 PM</button>
+            </div>
+            <div class="mt-auto p-4 bg-white/50 rounded-xl">
+              <p class="text-xs text-secondary leading-relaxed italic">"Our afternoon slots are perfect for a post-nap spruce up! Our senior groomer, Elena, is available for this time."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pet Details -->
+      <div class="mt-24">
+        <div class="flex items-center gap-6 mb-10">
+          <div class="h-px flex-1 bg-surface-container-highest"></div>
+          <h4 class="font-serif text-2xl px-4">About Your Pet</h4>
+          <div class="h-px flex-1 bg-surface-container-highest"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-6">
+            <div class="flex flex-col gap-2">
+              <label class="text-[10px] font-label font-bold uppercase tracking-wider text-outline px-1">Pet Name</label>
+              <input class="bg-surface-container-low border-none rounded-xl p-4 focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all" placeholder="e.g. Barnaby" type="text"/>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-[10px] font-label font-bold uppercase tracking-wider text-outline px-1">Breed Type</label>
+              <select class="bg-surface-container-low border-none rounded-xl p-4 focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all">
+                <option>Goldendoodle</option><option>Labradoodle</option><option>Cockapoo</option><option>Bernedoodle</option><option>Other Doodle Mix</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-[10px] font-label font-bold uppercase tracking-wider text-outline px-1">Pet Age</label>
+              <div class="grid grid-cols-3 gap-2">
+                <button class="py-3 bg-surface-container-low rounded-lg text-sm font-medium hover:bg-surface-container-highest">Puppy</button>
+                <button class="py-3 bg-primary text-white rounded-lg text-sm font-bold shadow-md">Adult</button>
+                <button class="py-3 bg-surface-container-low rounded-lg text-sm font-medium hover:bg-surface-container-highest">Senior</button>
+              </div>
+            </div>
+          </div>
+          <div class="bg-stone-100 rounded-3xl p-8 flex flex-col justify-center items-center text-center gap-6 relative overflow-hidden">
+            <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-4xl text-primary/40">add_a_photo</span></div>
+            <div>
+              <p class="font-serif text-lg">Add a Photo</p>
+              <p class="text-xs text-secondary mt-1">Helps us understand your pet's current coat condition</p>
+            </div>
+            <button class="px-6 py-2 border border-outline-variant rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white transition-all">Upload</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="w-full rounded-t-3xl mt-20 bg-stone-100">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 py-12 max-w-7xl mx-auto w-full">
+      <div><div class="text-xl font-serif text-stone-800 mb-4">HairDoodle</div><p class="text-stone-500 text-sm leading-relaxed">Bespoke grooming experiences tailored for the unique needs of doodle breeds.</p></div>
+      <div><h5 class="uppercase font-semibold text-stone-800 mb-4 text-xs tracking-wider">Services</h5><ul class="flex flex-col gap-2 text-stone-500 text-sm"><li class="hover:text-stone-800 cursor-pointer">Full Grooming</li><li class="hover:text-stone-800 cursor-pointer">The Puppy Intro</li><li class="hover:text-stone-800 cursor-pointer">Spa Add-ons</li></ul></div>
+      <div><h5 class="uppercase font-semibold text-stone-800 mb-4 text-xs tracking-wider">Studio</h5><ul class="flex flex-col gap-2 text-stone-500 text-sm"><li class="hover:text-stone-800 cursor-pointer">Our Story</li><li class="hover:text-stone-800 cursor-pointer">Careers</li><li class="hover:text-stone-800 cursor-pointer">Contact Us</li></ul></div>
+      <div><h5 class="uppercase font-semibold text-stone-800 mb-4 text-xs tracking-wider">Follow Us</h5><div class="flex gap-4"><a class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-amber-700 shadow-sm hover:ring-1 hover:ring-amber-500/20 transition-all cursor-pointer"><span class="material-symbols-outlined text-lg">photo_camera</span></a><a class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-amber-700 shadow-sm hover:ring-1 hover:ring-amber-500/20 transition-all cursor-pointer"><span class="material-symbols-outlined text-lg">share</span></a></div></div>
+    </div>
+    <div class="border-t border-stone-200/50 max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-stone-400 text-xs">
+      <p>© 2023 HairDoodle Bespoke Grooming. All rights reserved.</p>
+      <div class="flex gap-6"><a class="hover:text-stone-800 cursor-pointer">Privacy Policy</a><a class="hover:text-stone-800 cursor-pointer">Terms of Service</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== CHECKOUT PAGE ===================== -->
+<div id="page-checkout" class="page">
+  <nav class="fixed top-0 w-full z-50 glass-panel shadow-sm">
+    <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+      <div onclick="showPage('home')" class="font-serif italic text-xl text-amber-600 cursor-pointer">HairDoodle</div>
+      <a onclick="showPage('booking')" class="text-zinc-500 hover:text-primary transition-colors flex items-center gap-2 text-sm font-medium cursor-pointer"><span class="material-symbols-outlined text-[20px]">close</span><span>Exit Checkout</span></a>
+    </div>
+  </nav>
+  <main class="pt-24 pb-20 px-6 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-5 order-2 lg:order-1">
+        <div class="sticky top-28 space-y-8">
+          <header class="mb-8">
+            <h1 class="font-headline text-3xl md:text-4xl text-on-surface tracking-tight mb-2">Booking Summary</h1>
+            <p class="text-on-surface-variant font-body">Review your bespoke grooming details before we proceed.</p>
+          </header>
+          <div class="bg-surface-container-lowest p-8 rounded-xl space-y-6">
+            <div class="relative w-full aspect-[16/9] overflow-hidden rounded-lg mb-4">
+              <img alt="Groomed doodle" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7uN_XUv2mVzW3QmTJ76NpLy-qrOLN99gXgoDbP4zkX5V9uGQI7ML1z8KJOXIw0SUtFiyGPQzIoU54FhmFKasauXi4fEXeOb452yrbAxJpfthSAlXR72OkB1-Oy_TLfdL4SCb3uZaobAgspV54kZ57pbWXhu1f8H65UZei9CCuO3XdRhmFMmR9cShmkTT8LK3bprlsTWqFHIsQl52GmGDswCsf5RkcKf1LyaSSOWgiIyc4nr7kWLisbhB-H0eD1mvbs8IHSGLaOLE"/>
+              <div class="absolute top-4 right-4 bg-surface-container-lowest/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase text-primary">Premium Service</div>
+            </div>
+            <div class="space-y-4">
+              <div class="flex justify-between items-start">
+                <div><h2 class="font-headline text-2xl text-on-surface">The Atelier Groom</h2><p class="text-on-surface-variant text-sm italic">Master Stylist Appointment</p></div>
+                <span class="font-headline text-2xl text-primary">$185.00</span>
+              </div>
+              <div class="pt-4 space-y-3 border-t border-outline-variant/20">
+                <div class="flex items-center gap-3 text-on-surface-variant"><span class="material-symbols-outlined text-primary text-xl">calendar_month</span><span class="text-sm font-medium">Friday, October 24, 2024</span></div>
+                <div class="flex items-center gap-3 text-on-surface-variant"><span class="material-symbols-outlined text-primary text-xl">schedule</span><span class="text-sm font-medium">10:30 AM — 1:00 PM (2.5h)</span></div>
+                <div class="flex items-center gap-3 text-on-surface-variant"><span class="material-symbols-outlined text-primary text-xl">location_on</span><span class="text-sm font-medium">The Chelsea Atelier, NY</span></div>
+              </div>
+            </div>
+            <div class="bg-surface-container-low p-5 rounded-lg">
+              <div class="flex justify-between items-center mb-2"><span class="text-sm text-on-surface-variant">Subtotal</span><span class="text-sm font-semibold">$185.00</span></div>
+              <div class="flex justify-between items-center mb-2"><span class="text-sm text-on-surface-variant">Service Fee</span><span class="text-sm font-semibold">$12.00</span></div>
+              <div class="flex justify-between items-center pt-3 border-t border-outline-variant/20"><span class="font-headline text-lg text-on-surface">Total Due</span><span class="font-headline text-lg text-primary">$197.00</span></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-around px-4">
+            <div class="flex flex-col items-center gap-1 opacity-60"><span class="material-symbols-outlined text-on-surface text-2xl">verified_user</span><span class="text-[10px] uppercase tracking-widest font-bold">Secure</span></div>
+            <div class="flex flex-col items-center gap-1 opacity-60"><span class="material-symbols-outlined text-on-surface text-2xl">history</span><span class="text-[10px] uppercase tracking-widest font-bold">Flex-Cancel</span></div>
+            <div class="flex flex-col items-center gap-1 opacity-60"><span class="material-symbols-outlined text-on-surface text-2xl">loyalty</span><span class="text-[10px] uppercase tracking-widest font-bold">Atelier Care</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 order-1 lg:order-2">
+        <div class="space-y-12">
+          <section class="space-y-6">
+            <div class="flex items-center gap-4"><span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xs">01</span><h3 class="font-headline text-2xl text-on-surface">Contact Information</h3></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="space-y-2"><label class="text-[10px] uppercase tracking-[0.05em] font-bold text-on-surface-variant ml-1">Email Address</label><input class="w-full bg-surface-container-low border-none rounded-md px-4 py-3 focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all placeholder:text-zinc-400" placeholder="client@atelier.com" type="email"/></div>
+              <div class="space-y-2"><label class="text-[10px] uppercase tracking-[0.05em] font-bold text-on-surface-variant ml-1">Phone Number</label><input class="w-full bg-surface-container-low border-none rounded-md px-4 py-3 focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all placeholder:text-zinc-400" placeholder="+1 (555) 000-0000" type="tel"/></div>
+            </div>
+            <div class="flex items-center gap-2 ml-1"><input class="rounded text-primary focus:ring-primary border-outline-variant/30" id="sms-updates" type="checkbox"/><label class="text-xs text-on-surface-variant" for="sms-updates">Send me SMS updates about my doodle's groom status</label></div>
+          </section>
+
+          <section class="space-y-6">
+            <div class="flex items-center gap-4"><span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xs">02</span><h3 class="font-headline text-2xl text-on-surface">Payment Method</h3></div>
+            <div class="grid grid-cols-2 gap-4">
+              <button class="flex items-center justify-center gap-2 py-3 rounded-lg bg-on-surface text-surface border border-transparent hover:opacity-90 transition-opacity"><span class="font-bold">Apple Pay</span></button>
+              <button class="flex items-center justify-center gap-2 py-3 rounded-lg border border-outline-variant/30 bg-surface-container-lowest hover:bg-surface-container-low transition-colors"><span class="font-bold text-on-surface">Google Pay</span></button>
+            </div>
+            <div class="relative flex items-center py-2">
+              <div class="flex-grow border-t border-outline-variant/20"></div>
+              <span class="flex-shrink mx-4 text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Or pay with card</span>
+              <div class="flex-grow border-t border-outline-variant/20"></div>
+            </div>
+            <div class="space-y-4">
+              <div class="space-y-2"><label class="text-[10px] uppercase tracking-[0.05em] font-bold text-on-surface-variant ml-1">Cardholder Name</label><input class="w-full bg-surface-container-low border-none rounded-md px-4 py-3 focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all placeholder:text-zinc-400" placeholder="ALEXANDER DOODLE" type="text"/></div>
+              <div class="relative space-y-2"><label class="text-[10px] uppercase tracking-[0.05em] font-bold text-on-surface-variant ml-1">Card Number</label><div class="relative"><input class="w-full bg-surface-container-low border-none rounded-md pl-4 pr-12 py-3 focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all placeholder:text-zinc-400" placeholder="0000 0000 0000 0000" type="text"/><span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant">credit_card</span></div></div>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2"><label class="text-[10px] uppercase tracking-[0.05em] font-bold text-on-surface-variant ml-1">Expiry Date</label><input class="w-full bg-surface-container-low border-none rounded-md px-4 py-3 focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all placeholder:text-zinc-400" placeholder="MM/YY" type="text"/></div>
+                <div class="space-y-2"><label class="text-[10px] uppercase tracking-[0.05em] font-bold text-on-surface-variant ml-1">CVC / CVV</label><input class="w-full bg-surface-container-low border-none rounded-md px-4 py-3 focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all placeholder:text-zinc-400" placeholder="123" type="text"/></div>
+              </div>
+            </div>
+          </section>
+
+          <div class="pt-8 space-y-4">
+            <button onclick="showPage('confirmation')" class="editorial-gradient w-full py-5 rounded-full text-on-primary font-bold tracking-widest uppercase text-sm shadow-xl shadow-primary/20 active:scale-95 transition-all">Complete Payment — $197.00</button>
+            <p class="text-[10px] text-center text-on-surface-variant/70 leading-relaxed px-12">By clicking "Complete Payment", you agree to HairDoodle's <a class="underline cursor-pointer">Terms of Service</a> and <a class="underline cursor-pointer">Grooming Waiver</a>. Your payment info is encrypted and never stored on our servers.</p>
+          </div>
+
+          <div class="bg-primary/5 p-6 rounded-xl border border-primary/10">
+            <h4 class="font-headline text-lg text-primary mb-4 text-center">Your Atelier Journey</h4>
+            <div class="flex justify-between items-start relative max-w-sm mx-auto">
+              <div class="absolute top-4 left-0 w-full h-[2px] bg-outline-variant/20 z-0"></div>
+              <div class="relative z-10 flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center"><span class="material-symbols-outlined text-sm">check</span></div><span class="text-[9px] uppercase font-bold tracking-tighter text-on-surface-variant">Selection</span></div>
+              <div class="relative z-10 flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center"><span class="material-symbols-outlined text-sm">payment</span></div><span class="text-[9px] uppercase font-bold tracking-tighter text-primary">Payment</span></div>
+              <div class="relative z-10 flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-sm">content_cut</span></div><span class="text-[9px] uppercase font-bold tracking-tighter text-on-surface-variant opacity-40">The Groom</span></div>
+              <div class="relative z-10 flex flex-col items-center gap-2"><div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-sm">auto_awesome</span></div><span class="text-[9px] uppercase font-bold tracking-tighter text-on-surface-variant opacity-40">Revealed</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="py-12 px-6 border-t border-outline-variant/10 text-center">
+    <div class="max-w-7xl mx-auto flex flex-col items-center gap-4">
+      <span class="font-headline italic text-on-surface-variant">HairDoodle Atelier</span>
+      <div class="flex gap-6 text-[10px] uppercase tracking-widest font-bold text-on-surface-variant/50">
+        <a class="hover:text-primary transition-colors cursor-pointer">Privacy Policy</a>
+        <a class="hover:text-primary transition-colors cursor-pointer">Cancellation Policy</a>
+        <a class="hover:text-primary transition-colors cursor-pointer">Help Center</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== CONFIRMATION PAGE ===================== -->
+<div id="page-confirmation" class="page min-h-screen items-center justify-center px-4 pt-20 pb-12 bg-background">
+  <header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-sm px-6 py-4 flex justify-between items-center">
+    <div onclick="showPage('home')" class="font-serif italic text-xl text-zinc-900 tracking-tight cursor-pointer">HairDoodle</div>
+    <div class="flex gap-4"><span class="material-symbols-outlined text-zinc-500">help_outline</span></div>
+  </header>
+  <div class="max-w-xl w-full flex flex-col items-center text-center">
+    <div class="relative mb-10">
+      <div class="absolute inset-0 bg-primary-fixed opacity-20 blur-3xl rounded-full"></div>
+      <div class="relative w-48 h-48 rounded-full overflow-hidden border-4 border-surface-container-lowest soft-glow">
+        <img alt="Happy groomed goldendoodle" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBca4DMMonK66ODgKgMFFYR3fdfwMfFkBetF1T6WlhVOxE1CV0CmV9R25X0nEkkegcK0RCHZlbunDYPhIOm9FckLpmL8wBhNYa1M8jCr_RO_OfNWDVP5Hl0IqYeq20B00NSGPveWHZcR4MvhxBmV84VxMbaWkoPdukTJULRBWSUUUcMpS3avOEe9WAz-xXIUhxFlrzKv4xlvQp6cHzIYXQy5JtOXx_8thZppnD_6uPwkNDLw0Va1yFPf_MxJBFvyQXCsfHCb-tatbk"/>
+      </div>
+      <div class="absolute -bottom-2 -right-2 bg-primary p-3 rounded-full text-white shadow-lg"><span class="material-symbols-outlined text-3xl" style="font-variation-settings:'FILL' 0,'wght' 600;">check</span></div>
+    </div>
+    <div class="space-y-3 mb-12">
+      <h1 class="font-headline text-4xl md:text-5xl text-on-surface font-bold tracking-tight">Your Doodle is Scheduled!</h1>
+      <p class="text-secondary text-lg font-medium">A confirmation email is heading to your inbox.</p>
+    </div>
+    <div class="w-full bg-surface-container-lowest rounded-xl p-8 mb-12 soft-glow relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-1 h-full bg-primary-fixed-dim"></div>
+      <h2 class="text-left font-headline text-xl mb-8 text-on-surface border-b border-outline-variant/20 pb-4">Appointment Summary</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 text-left">
+        <div class="flex items-start gap-4"><div class="bg-surface-container-low p-2 rounded-lg"><span class="material-symbols-outlined text-primary">content_cut</span></div><div><p class="text-[10px] uppercase tracking-widest text-secondary font-bold mb-1">Service</p><p class="font-semibold text-on-surface">Signature Teddy Cut</p></div></div>
+        <div class="flex items-start gap-4"><div class="bg-surface-container-low p-2 rounded-lg"><span class="material-symbols-outlined text-primary">calendar_month</span></div><div><p class="text-[10px] uppercase tracking-widest text-secondary font-bold mb-1">Date</p><p class="font-semibold text-on-surface">Friday, Nov 24, 2023</p></div></div>
+        <div class="flex items-start gap-4"><div class="bg-surface-container-low p-2 rounded-lg"><span class="material-symbols-outlined text-primary">schedule</span></div><div><p class="text-[10px] uppercase tracking-widest text-secondary font-bold mb-1">Time</p><p class="font-semibold text-on-surface">10:30 AM — 1:00 PM</p></div></div>
+        <div class="flex items-start gap-4"><div class="bg-surface-container-low p-2 rounded-lg"><span class="material-symbols-outlined text-primary">location_on</span></div><div><p class="text-[10px] uppercase tracking-widest text-secondary font-bold mb-1">Location</p><p class="font-semibold text-on-surface">Main St. Atelier, NY</p></div></div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row gap-4 w-full">
+      <button class="flex-1 editorial-gradient text-on-primary py-5 rounded-full font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-[0.98]"><span class="material-symbols-outlined">event_available</span>Add to Calendar</button>
+      <button onclick="showPage('home')" class="flex-1 bg-surface-container-lowest text-primary py-5 rounded-full font-bold border border-outline-variant/20 hover:bg-surface-container-low transition-all active:scale-[0.98]">Back to Home</button>
+    </div>
+    <p class="mt-8 text-secondary text-sm">Need to make a change? You can modify your booking up to 24 hours before. <a class="text-primary font-semibold underline underline-offset-4 ml-1 cursor-pointer">View Policy</a></p>
+  </div>
+  <div class="fixed top-0 right-0 -z-10 w-[500px] h-[500px] bg-primary-fixed/10 blur-[120px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
+  <div class="fixed bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-secondary-container/30 blur-[100px] rounded-full pointer-events-none -translate-x-1/4 translate-y-1/4"></div>
+</div>
+
+<script>
+  function showPage(name) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => {
+      p.classList.remove('active');
+      p.style.display = 'none';
+    });
+
+    const target = document.getElementById('page-' + name);
+    if (!target) return;
+
+    // Special display types
+    if (name === 'login') {
+      target.style.display = 'flex';
+    } else if (name === 'confirmation') {
+      target.style.display = 'flex';
+      target.style.flexDirection = 'column';
+      target.style.alignItems = 'center';
+      target.style.justifyContent = 'center';
+    } else {
+      target.style.display = 'block';
+    }
+    target.classList.add('active');
+
+    // Show/hide main nav (hide on checkout and confirmation)
+    const mainNav = document.getElementById('main-nav');
+    if (name === 'checkout' || name === 'confirmation' || name === 'login') {
+      mainNav.style.display = 'none';
+    } else {
+      mainNav.style.display = 'flex';
+    }
+
+    window.scrollTo(0, 0);
+  }
+
+  // Init
+  showPage('home');
+</script>
+</body>
+</html>
